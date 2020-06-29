@@ -11,7 +11,6 @@ struct ContentView: View {
     @State var selection: Set<Int> = [0]
     var body: some View {
         NavigationView {
-            
             List(selection: self.$selection) {
                 NavigationLink(destination: Inbox()) {
                     Label("Inbox", systemImage: "tray")
@@ -23,6 +22,9 @@ struct ContentView: View {
             .listStyle(SidebarListStyle())
             .frame(minWidth: 100, idealWidth: 150, maxWidth: 200, maxHeight: .infinity)
             
+            Text("Select a folder")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
             Text("Select an email")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
@@ -31,37 +33,32 @@ struct ContentView: View {
 
 struct Inbox: View {
     var body: some View {
-        NavigationView {
-            List {
-                NavigationLink(destination: MessageView()) {
-                    VStack(alignment: .leading) {
-                        Text("Jordan Singer").font(.headline)
-                        Text("Hello, World!").font(.body)
-                    }
-                    .padding(.vertical, 8)
+        List {
+            NavigationLink(destination: MessageView()) {
+                VStack(alignment: .leading) {
+                    Text("Jordan Singer").font(.headline)
+                    Text("Hello, World!").font(.body)
                 }
-                
-                NavigationLink(destination: MessageView()) {
-                    VStack(alignment: .leading) {
-                        Text("Craig Federighi").font(.headline)
-                        Text("lil apps + ").font(.body)
-                    }
-                    .padding(.vertical, 8)
-                }
-                
-                NavigationLink(destination: MessageView()) {
-                    VStack(alignment: .leading) {
-                        Text("I build my ideas").font(.headline)
-                        Text("I build my ideas #4 - 06/23/20").font(.body)
-                    }
-                    .padding(.vertical, 8)
-                }
+                .padding(.vertical, 8)
             }
-            .listStyle(InsetListStyle())
             
-            Text("Select an email")
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            NavigationLink(destination: MessageView()) {
+                VStack(alignment: .leading) {
+                    Text("Craig Federighi").font(.headline)
+                    Text("lil apps + ").font(.body)
+                }
+                .padding(.vertical, 8)
+            }
+            
+            NavigationLink(destination: MessageView()) {
+                VStack(alignment: .leading) {
+                    Text("I build my ideas").font(.headline)
+                    Text("I build my ideas #4 - 06/23/20").font(.body)
+                }
+                .padding(.vertical, 8)
+            }
         }
+        .listStyle(InsetListStyle())
         .navigationTitle("Inbox")
         .toolbar {
             
